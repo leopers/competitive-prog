@@ -21,7 +21,7 @@ int main(){
     int p;
     cin>>p;
     double sum=0;
-    for(int j=0; j<m; ++j){
+    for(int j=0; j<p; ++j){
       string fruta;
       int q;
       cin >> fruta >> q;
