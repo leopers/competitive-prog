@@ -1,9 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <queue>
-#include <set>
-#include <climits>
-
+#include <bits/stdc++.h>
 using namespace std;
 
 typedef pair<int, int> pii;  // Pair of (weight, vertex)
@@ -15,7 +10,8 @@ class Graph {
 public:
     Graph(int V);
     void addEdge(int u, int v, int w);
-    void dijkstra(int source);
+    vector<int> dijkstra(int source);
+    queue<int> buildMinPath(int source, int end);
 };
 
 Graph::Graph(int V) {
@@ -28,22 +24,18 @@ void Graph::addEdge(int u, int v, int w) {
     adjList[v].emplace_back(w, u);  // If the graph is undirected
 }
 
-void Graph::dijkstra(int source) {
+vector<int> Graph::dijkstra(int source) {
     priority_queue<pii, vector<pii>, greater<pii>> pq; // Min-heap
     vector<int> dist(V, INT_MAX);
-    set<int> unvisited;
+    vector<int> predecessor(V);
 
     dist[source] = 0;
-    pq.push({0, source});
-
-    for (int i = 0; i < V; ++i) {
-        unvisited.insert(i);
-    }
+    for(int i=0; i<V; ++i)
+        pq.push({dist[i], i});
 
     while (!pq.empty()) {
         int u = pq.top().second;
         pq.pop();
-        unvisited.erase(u);
 
         for (const pii& neighbor : adjList[u]) {
             int v = neighbor.second;
@@ -51,17 +43,25 @@ void Graph::dijkstra(int source) {
 
             if (dist[u] + weight < dist[v]) {
                 dist[v] = dist[u] + weight;
-                pq.push({dist[v], v});
+                predecessor[v] = u;
             }
         }
     }
 
-    // Print shortest distances from source
-    cout << "Shortest distances from source " << source << ":\n";
-    for (int i = 0; i < V; ++i) {
-        cout << "Vertex " << i << ": " << dist[i] << endl;
-    }
+    return predecessor;
 }
+
+queue<int> Graph::buildMinPath(int source, int end){
+    vector<int> predecessor = dijkstra(source);
+    queue<int> path;
+    while(end!=source){
+        path.push(end);
+        end = predecessor[end];
+    }
+    path.push(end);
+    return path;
+}
+
 
 int main() {
     int V, E;  // Number of vertices and edges
