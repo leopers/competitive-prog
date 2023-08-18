@@ -26,9 +26,7 @@ void Digraph::check_vertex(std::size_t v) const {
     throw std::out_of_range{"vertex does not exist"};
 }
 
-std::vector<std::size_t>
-  Digraph::successors(std::size_t v) const
-{
+std::vector<std::size_t> Digraph::successors(std::size_t v) const{
   std::vector<std::size_t> s;
   for (std::size_t to = 0; to < order(); ++to)
     if (edge_exists(v, to))
