@@ -28,22 +28,30 @@ vector<int> Graph::dijkstra(int source) {
     priority_queue<pii, vector<pii>, greater<pii>> pq; // Min-heap
     vector<int> dist(V, INT_MAX);
     vector<int> predecessor(V);
+    set<int> unvisitted;
 
     dist[source] = 0;
-    for(int i=0; i<V; ++i)
-        pq.push({dist[i], i});
+    pq.push({0, source});
+
+    for(int i=0; i<V;++i)
+        unvisitted.insert(i);
 
     while (!pq.empty()) {
         int u = pq.top().second;
         pq.pop();
 
-        for (const pii& neighbor : adjList[u]) {
-            int v = neighbor.second;
-            int weight = neighbor.first;
+        if(unvisitted.find(u) != unvisitted.end()){
+            unvisitted.erase(u);
 
-            if (dist[u] + weight < dist[v]) {
-                dist[v] = dist[u] + weight;
-                predecessor[v] = u;
+            for (const pii& neighbor : adjList[u]) {
+                int v = neighbor.second;
+                int weight = neighbor.first;
+
+                if (dist[u] + weight < dist[v]) {
+                    dist[v] = dist[u] + weight;
+                    pq.push({dist[v], v});
+                    predecessor[u] = v;
+                }
             }
         }
     }
