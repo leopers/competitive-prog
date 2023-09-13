@@ -41,7 +41,7 @@ int main(){
 
 
     cout << "Instancia " << h << '\n';
-    for(int a=0; a<team.size(); ++a){
+    for(unsigned long a=0; a<team.size(); ++a){
       cout << team[a].first << ' ';
     }
     cout<<'\n';
