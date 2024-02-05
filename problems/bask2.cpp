@@ -4,7 +4,8 @@ using namespace std;
 
 bool comp(pair<int, pair<int, int>> a, pair<int, pair<int, int>> b){
   if(a.second.first == b.second.first){
-    if(a.second.second/a.second.first == b.second.second/b.second.first) return a.second.second > b.second.second;
+    if(a.second.second/a.second.first == b.second.second/b.second.first) 
+      return a.second.second > b.second.second;
     return a.second.first/a.second.second > b.second.first/b.second.second;
   }
 

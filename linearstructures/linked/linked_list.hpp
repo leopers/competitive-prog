@@ -38,7 +38,7 @@ public:
 
   Iterator begin() const {
     Iterator b;
-    b.node_ = head_;
+    b.node_ = head_
     return b;
   }
 
