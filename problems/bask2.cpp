@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-using namespace std;
+using namespace std; 
 
 
 bool comp(pair<int, pair<int, int>> a, pair<int, pair<int, int>> b){
@@ -8,7 +8,7 @@ bool comp(pair<int, pair<int, int>> a, pair<int, pair<int, int>> b){
       return a.second.second > b.second.second;
     return a.second.first/a.second.second > b.second.first/b.second.second;
   }
-
+//let's leave a silly comment right here
   return a.second.first>b.second.first;
 }
 

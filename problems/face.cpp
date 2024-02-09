@@ -1,4 +1,4 @@
-#include "stdc++.h"
+#include <bits/stdc++.h>
 #include <cstdio>
 #include <string>
 using namespace std;
